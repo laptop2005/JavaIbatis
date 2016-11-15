@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="test">
+	<resultMap id="TestResult" class="com.test.vo.TestVO">
+		<result column="TEST_ID" property="testId" />
+		<result column="TEST_NAME" property="testName" />
+		<result column="TEST_DATE" property="testDate" />
+	</resultMap>
+	
+	<select id="selectTest" resultMap="TestResult">
+		SELECT
+			TEST_ID,
+			TEST_NAME,
+			TEST_DATE
+		FROM
+			TEST
+		<isNotEmpty property="testId" prepend="WHERE">
+			TEST_ID=#testId#
+		</isNotEmpty>
+	</select>
+</sqlMap>
